@@ -9,7 +9,7 @@ for (k,v) in zip(_ordered_numbers, _ordered_alphabet):
 	N_to_C[k] += v
 
 # Import a text file with a list of words in it, one word
-# per line.
+#  per line.
 def import_corpus(file):
 	wordlist = []
 	with open(file) as f:
