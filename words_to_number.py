@@ -4,9 +4,7 @@ def words_to_number(words, pattern = "1-111-111-1111"):
     dashes = get_dash_locations(pattern)
 
     number_out = words.replace('-','')
-
-    for k in C_to_N.keys():
-    	number_out = number_out.replace(k,C_to_N[k])
+    number_out = C_to_N(number_out)
 
     for idx in dashes:
     	number_out = number_out[:idx] + '-' + number_out[idx:]
