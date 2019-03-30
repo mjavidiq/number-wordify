@@ -10,7 +10,7 @@ def test_no_words():
 
 def test_existence_of_word():
     numbers = ["1-800-724-6837", "1-800-724-6837-90"]
-    words = ["1800PAINTER","1800PAINTER90"]
+    words = ["1800-PAINTER","1800-PAINTER-90"]
     for n,w in zip(numbers,words):
     	all_words = all_wordifications(n)
     	assert len(set([w]).intersection(set(all_words))) == 1
@@ -18,7 +18,7 @@ def test_existence_of_word():
 def test_small_words():
 	small_words = "./language/words_short.txt"
 	test_nums = ["4", "43", "4355"]
-	test_wordifieds = [set(["I","4"]), set(["HE","43", "I3"]),
-		set(["4355","HELL","GELL", "I355", "HE55"])]
+	test_wordifieds = [set(["I","4"]), set(["HE","43", "I-3"]),
+		set(["4355","HELL","GELL", "I-355", "HE-55"])]
 	for n, w in zip(test_nums, test_wordifieds):
-		assert all_wordifications(n, fname = small_words) == w		
+		assert set(all_wordifications(n, fname = small_words)) == w		

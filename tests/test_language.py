@@ -13,3 +13,9 @@ def test_import_dictionary():
 
 	for w in words:
 		assert w in wordlist
+
+def test_fix_dashes():
+	numbers = ["1-800","1-800-1"]
+	in_strings = ["-1-800","1--800--1-"]
+	for (n, s) in zip(numbers, in_strings):
+		assert set([n]) == lang.fix_dashes([s], n)
