@@ -24,7 +24,7 @@ class wordifier:
         # Pre-allocate the dictionary for speed
         length = len(number)    
         dict_nums = set([
-            self.phone_number[i:j+1] for i in xrange(length) for j in xrange(i,length)
+            self.phone_number[i:j+1] for i in range(length) for j in range(i,length)
             ])
         self.N_to_C_dict = dict.fromkeys(dict_nums)
 
