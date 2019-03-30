@@ -6,10 +6,10 @@ def test_no_words():
 	for n in numbers:
 		all_words = all_wordifications(n)
 		assert len(all_words) == 1
-		assert all_words[0] == n.replace('-','')
+		assert next(iter(all_words)) == n.replace('-','')
 
 def test_existence_of_word():
-    numbers = ["18007246837", "1800724683790"]
+    numbers = ["1-800-724-6837", "1-800-724-6837-90"]
     words = ["1800PAINTER","1800PAINTER90"]
     for n,w in zip(numbers,words):
     	all_words = all_wordifications(n)
@@ -17,6 +17,8 @@ def test_existence_of_word():
 
 def test_small_words():
 	small_words = "./language/words_short.txt"
-	assert all_wordifications("4", fname = small_words) == set(['I','4'])
-	assert corpus("43", fname = small_words) == set(['HE','43'])
-	assert corpus("4355", fname = small_words) == set(['4355','HELL','GELL'])
+	test_nums = ["4", "43", "4355"]
+	test_wordifieds = [set(["I","4"]), set(["HE","43", "I3"]),
+		set(["4355","HELL","GELL", "I355", "HE55"])]
+	for n, w in zip(test_nums, test_wordifieds):
+		assert all_wordifications(n, fname = small_words) == w		
