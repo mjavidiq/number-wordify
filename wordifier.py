@@ -1,11 +1,13 @@
+import language.language_help as lang
+
 # Given a file with words in it and a phone number, wordifies
 #   that phone number.
 class wordifier:
-    
+
     def __init__(self, number, fname = "./language/words_alpha.txt"):
         self.phone_number = number.replace('-','')
 
-        self.words = lang.import_dictionary
+        self.words = lang.import_dictionary(fname)
 
         # Keep only words which could appear SOMEWHERE in the string
         #   as well as A and I (exclude other letters as "words", e.g. 'F')
@@ -13,7 +15,7 @@ class wordifier:
         self.words = list(filter(lambda w: len(w) > 1, self.words))
         self.words += ['A', 'I']
         self.words = list(
-            filter(lambda w: C_to_N(w) in self.phone_number, self.words) 
+            filter(lambda w: lang.C_to_N(w) in self.phone_number, self.words) 
             )
         # Sorting words is important so we know how all shorter numbers
         #   get wordified as we build up a set of wordifications
@@ -33,18 +35,22 @@ class wordifier:
         # Add each number substring which is a word to the dictionary in order from 
         #   smallest words to largest words
         for w in self.words:
-            key = C_to_N(w)
+            key = lang.C_to_N(w)
+            # self.add_number_word(key, '-' + w + '-')
             self.add_number_word(key, w)
 
     # See self.wordifier()
     def __call__(self, number):
-        return self.wordifier(self, number)
+        return self.wordifier(number)
         
 
     # Given a number, return all of its possible wordifications
     def wordifier(self, number):
         if len(number) == 0: 
             return set([])
+
+        if self.N_to_C_dict[number] == set([]):
+            return self.add_number_word(number, number)
         
         return self.N_to_C_dict[number]
 
