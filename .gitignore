@@ -1,3 +1,2 @@
-/tests/__pycache__/
-/language/__pycache__/
-/__pycache__/
+*/__pycache__/*
+*.pyc
