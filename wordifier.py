@@ -34,12 +34,8 @@ class wordifier:
             self.add_number_word(key, '-' + w + '-')
             # self.add_number_word(key, w)
 
-    # See self.wordifier()
-    def __call__(self, number):
-        return self.wordifier(number)
-
     # Given a number, return all of its possible wordifications
-    def wordifier(self, number):
+    def wordify(self, number):
         if len(number) == 0: 
             return set([])
 
@@ -63,8 +59,8 @@ class wordifier:
         #   of the split number
         if len(number) > 1:
             for j in range(len(number)-1):
-                lower = self.wordifier(number[:j+1])
-                upper = self.wordifier(number[j+1:])
+                lower = self.wordify(number[:j+1])
+                upper = self.wordify(number[j+1:])
                 for prefix in lower:
                     for suffix in upper:
                         self.N_to_C_dict[number].add(prefix + suffix)

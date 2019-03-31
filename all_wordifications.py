@@ -6,7 +6,7 @@ from language.language_help import fix_dashes
 #   all possible wordifications.
 def all_wordifications(number, fname = "./language/words_alpha.txt"):
     worder = wordifier.wordifier(number, fname)
-    wordified = set(worder(number.replace('-','')))
+    wordified = set(worder.wordify(number.replace('-','')))
 
     wordified_l = list(fix_dashes(wordified, number))
     wordified_l = sorted(wordified_l, key = lambda s: s.count('-'))
