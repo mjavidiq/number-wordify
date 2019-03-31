@@ -21,8 +21,10 @@ def main(args):
 	elif function == "-a" or function == "--all":
 		all_w = all_wordifications(in_str) 
 		print("Found {} wordifications".format(len(all_w)))
+		for i,w in enumerate(all_w):
+			print(i+1, w)
 		return  all_w
-		
+
 	else:
 		print("Invalid argument")
 
