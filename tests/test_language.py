@@ -25,8 +25,8 @@ def test_fix_dashes():
 
 # Test is the same as above but should do nothing
 def test_fix_dashes_indentity():
-	numbers = ["724-6837","724-6837-90"]
-	in_strings = ["PAINTER","PAINTER-90"]
+	numbers = ["724-6837","724-6837-90","1-800-724-6837"]
+	in_strings = ["PAINTER","PAINTER-90","1-800-724-6837"]
 	for (n, s) in zip(numbers, in_strings):
 		assert set([s]) == lang.fix_dashes([s], n)
 
