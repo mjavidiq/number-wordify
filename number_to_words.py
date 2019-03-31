@@ -1,17 +1,23 @@
 import wordifier
-from language.language_help import fix_dashes
+import language.language_help as lang
 
 # Given a phone number, finds all possible wordifications of it
 #   according to the specified dictionary and returns a possible
 #   wordification.
 def number_to_words(number, fname = "./language/words_alpha.txt"):
-    worder = wordifier.wordifier(number, fname)
-    wordified = set(worder(number.replace('-','')))
+    corpus = lang.import_dictionary(fname)
 
-    words = list(fix_dashes(wordified, number))
-    
-    retval = words[0]
-    if retval == number and len(words) > 1:
-        retval = words[1]
+    # Keep only words which could appear SOMEWHERE in the string
+    words = list(
+        filter(lambda w: lang.C_to_N(w) in number, corpus) 
+        )
+    # Sorting words is important so we know how all shorter numbers
+    #   get wordified as we build up a set of wordifications
+    words = sorted(words, key = lambda w: len(w))
 
-    return retval
+    wordified = number
+    for w in words:
+        w_num = lang.C_to_N(w)
+        wordified = number.replace(w_num, w)
+
+    return wordified
