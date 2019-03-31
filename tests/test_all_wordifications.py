@@ -6,11 +6,11 @@ def test_no_words():
 	for n in numbers:
 		all_words = all_wordifications(n)
 		assert len(all_words) == 1
-		assert next(iter(all_words)) == n.replace('-','')
+		assert next(iter(all_words)) == n
 
 def test_existence_of_word():
     numbers = ["1-800-724-6837", "1-800-724-6837-90"]
-    words = ["1800-PAINTER","1800-PAINTER-90"]
+    words = ["1-800-PAINTER","1-800-PAINTER-90"]
     for n,w in zip(numbers,words):
     	all_words = all_wordifications(n)
     	assert len(set([w]).intersection(set(all_words))) == 1
@@ -30,10 +30,10 @@ def test_invariant_numbers():
     	words2 = set(all_wordifications(n2))
     	assert len(words1) == len(words2)
     	for w in words2:
-    		assert ("1100" + w in words1) or ("1100-" + w in words1)
+    		assert ("1-100" + w in words1) or ("1-100-" + w in words1)
 
 def test_adjacent_words():
 	numbers = ["1-100-724-6837","724-6837-1-100",]
-	words = ["1100-SAG-OVER","SAG-OVER-1100"]
+	words = ["1-100-SAG-OVER","SAG-OVER-1-100"]
 	for (n,w) in zip(numbers, words):
 		assert w in set(all_wordifications(n))

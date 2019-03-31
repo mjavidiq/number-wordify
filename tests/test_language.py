@@ -16,9 +16,16 @@ def test_import_dictionary():
 
 def test_fix_dashes():
 	numbers = ["1-800","1-800-1"]
-	in_strings = ["-1-800","1--800--1-"]
+	in_strings = ["-1-800","1800--1-"]
 	for (n, s) in zip(numbers, in_strings):
 		assert set([n]) == lang.fix_dashes([s], n)
+
+def test_fix_dashes_indentity():
+	numbers = ["724-6837","724-6837-90"]
+	in_strings = ["PAINTER","PAINTER-90"]
+	for (n, s) in zip(numbers, in_strings):
+		assert set([s]) == lang.fix_dashes([s], n)
+
 
 def test_nth_finder():
 	strings = ["18007246837","1-800-724-6837","1800-PAINTER"]
