@@ -19,3 +19,11 @@ def test_fix_dashes():
 	in_strings = ["-1-800","1--800--1-"]
 	for (n, s) in zip(numbers, in_strings):
 		assert set([n]) == lang.fix_dashes([s], n)
+
+def test_nth_finder():
+	strings = ["18007246837","1-800-724-6837","1800-PAINTER"]
+	no_dash_strings = [s.replace("-","") for s in strings]
+	for (s, no_dash_s) in zip(strings, no_dash_strings):
+		for j in range(len(no_dash_s)):
+			print(lang.find_nth_character(s,j))
+			assert no_dash_s[j] == s[lang.find_nth_character(s,j)]

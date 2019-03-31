@@ -1,5 +1,3 @@
-import itertools as it
-
 # Construct two dictionaries: one mapping characters to their number
 #   and one mapping numbers to possible characters
 _ordered_alphabet = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
@@ -45,3 +43,15 @@ def fix_dashes(words, number):
         new_words += [str(new_w)]
 
     return set(new_words)
+
+# Returns the index of the nth non-dash character in a string s
+def find_nth_character(s,n):
+    idx = 0
+    char_count = -1
+    for char in s:
+        if char != '-':
+            char_count += 1
+        if char_count == n:
+            return idx
+        else:
+            idx += 1
