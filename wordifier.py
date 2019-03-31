@@ -62,22 +62,10 @@ class wordifier:
             # Iterate over where we split the number into two sub-numbers
             #   that we wordify and stich together with all wordifications
             #   of the split number
-            for j in range(len(number)):
-                split_chars = self.wordifier(number[j])
-                lower = self.wordifier(number[:j])
+            for j in range(len(number)-1):
+                lower = self.wordifier(number[:j+1])
                 upper = self.wordifier(number[j+1:])
-                # If we split on the first character
-                if len(lower) == 0:
-                    lower = set([''])
-                # If we split on the last character
-                if len(upper) == 0:
-                    upper = set([''])
-
-                # Add all possible wordifications to the dictionary
-                for p in split_chars:
-                    for prefix in lower:
-                        for suffix in upper:
-                            self.N_to_C_dict[number].add(
-                                prefix + p + suffix
-                                )
+                for prefix in lower:
+                    for suffix in upper:
+                        self.N_to_C_dict[number].add(prefix + suffix)
         return self.N_to_C_dict[number]

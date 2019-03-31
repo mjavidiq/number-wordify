@@ -7,5 +7,3 @@ def all_wordifications(number, fname = "./language/words_alpha.txt"):
 	wordified = set([w.replace('--','-') for w in wordified])
 
 	return list(fix_dashes(wordified, number))
-
-print(all_wordifications("1-800-7246837"))
