@@ -7,7 +7,7 @@ def words_to_number(words, pattern = "1-111-111-1111"):
     number_out = C_to_N(number_out)
 
     for idx in dashes:
-    	number_out = number_out[:idx] + '-' + number_out[idx:]
+        number_out = number_out[:idx] + '-' + number_out[idx:]
 
     return number_out
 
