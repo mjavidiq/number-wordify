@@ -32,7 +32,7 @@ def test_small_words():
 
 # Test that appending more numbers which cannot be wordified
 #	to some wordifiable numbers does not affect the cardinality
-#	of the set of wordified numbers.
+#	of the set of wordified numbers
 def test_invariant_numbers():
     number_pairs = [("1-100-724-6837", "724-6837")]
     for (n1,n2) in number_pairs:
@@ -50,3 +50,16 @@ def test_adjacent_words():
 	words = ["1-100-SAG-OVER","SAG-OVER-1-100", "SAG-OVER-SAG-OVER"]
 	for (n,w) in zip(numbers, words):
 		assert w in set(all_wordifications(n))
+
+# Test that we can predict the number of wordifications by separating
+#	two sub-numbers of known size and then taking the product of 
+#	the number of their wordifications
+def test_product_of_wordifications():
+	sub_number_a = "724-6837"
+	sub_number_b = "832"
+	number = sub_number_a + "-1-" + sub_number_b
+
+	sub_a = len(all_wordifications(sub_number_a))	
+	sub_b = len(all_wordifications(sub_number_b))	
+	N = len(all_wordifications(number))
+	assert sub_a*sub_b  == N
