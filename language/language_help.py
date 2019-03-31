@@ -58,6 +58,7 @@ def fix_dashes(words, number):
     return set(new_words)
 
 # Returns the index of the nth non-dash character in a string s
+#   where n starts from 0
 def find_nth_character(s,n):
     idx = 0
     char_count = -1
