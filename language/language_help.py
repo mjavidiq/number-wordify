@@ -31,6 +31,8 @@ _relevant_chars = _ordered_alphabet + _relevant_nums
 # Given a list of wordified numbers, fix each string so that:
 #   1. Each sub-word begins and ends with a single dash
 #   2. The wordified number does not begin or end with a dash '-'
+#   3. In places where dashes were before (as counted by number of digits
+#       and letters) we place a dash if one does not exist (e.g. the 1-800 dash)
 def fix_dashes(words, number):
     new_words = []
     for w in words:
@@ -39,6 +41,17 @@ def fix_dashes(words, number):
             new_w = new_w[1::]
         if new_w[-1] == '-':
             new_w = new_w[0:-1]
+
+        digit_count = 0
+        for digit in number:
+            if digit == '-':
+                curr_idx = find_nth_character(new_w, digit_count-1)
+                if new_w[curr_idx+1] == '-' or new_w[curr_idx+2] in _ordered_alphabet:
+                    pass
+                else:
+                    new_w = new_w[:curr_idx+1] + '-' + new_w[curr_idx+1:]
+            else:
+                digit_count += 1
 
         new_words += [str(new_w)]
 
