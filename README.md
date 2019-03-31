@@ -25,11 +25,17 @@ As an example, running
 
 from the root directory of the repository should result in
 
-`Found 4 wordifications  
+```
+Found 4 wordifications  
+
 1 1-AE-0-000-0000  
+
 2 1-230-000-0000  
+
 3 1-BE-0-000-0000  
-4 1-AD-0-000-0000`
+
+4 1-AD-0-000-0000
+```
 
 up to some reordering of the wordifications.
 
