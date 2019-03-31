@@ -4,7 +4,7 @@ Wordification is the process of taking a phone number and replacing subsets of t
 This repository implements three main functions:
 
 1. `words_to_number` takes a string of numbers and capital letters and maps it to the phone number which corresponds to that "wordified" phone number. By default it maps to 10-digit US phone numbers with a leading `1-` but support generic patterns for the phone number. Will only return the initial phone number if there are no valid wordifications for the number.
-2. `all_wordifications` which takes as input a reference to a file containing all possible words and a phone number and returns a list of all possible "wordified" phone numbers for that number and list of words. By convention, the initial phone number is considered a wordification of itself, so there is always at least one wordification (the identity). This function works for any phone numbers which are no longer than the longest word in the word list after removing dashes (length 15 for the supplied word list).
+2. `all_wordifications` which takes as input a reference to a file containing all possible words and a phone number and returns a list of all possible "wordified" phone numbers for that number and list of words sorted by number of dashes present. By convention, the initial phone number is considered a wordification of itself, so there is always at least one wordification (the identity). This function works for any phone numbers which are no longer than the longest word in the word list after removing dashes (length 15 for the supplied word list).
 3. `number_to_words` which outputs a single wordified version of the input phone number.
 
 # Requirements
@@ -27,21 +27,17 @@ from the root directory of the repository should result in
 
 ```
 Found 4 wordifications  
-
-1 1-AE-0-000-0000  
-
-2 1-230-000-0000  
-
-3 1-BE-0-000-0000  
-
-4 1-AD-0-000-0000
+1 1-230-000-0000
+2 1-AE-0-000-0000
+3 1-AD-0-000-0000
+4 1-BE-0-000-0000
 ```
 
 up to some reordering of the wordifications.
 
 In each case the resulting phone number or wordification(s) are printed out. In the first two cases, the printed string is returned. In the latter case, all wordifications are printed and numbered.
 
-number_to_words may not return the same value for each run; this is due to the use of unordered sets for storing wordifications.
+`number_to_words` may not return the same value for each run if there are multiple wordifications which use a word of the same length in wordification.
 
 A set of unit tests are written for most modules in this code. To run them, from the root folder run `pytest` and the set of tests in the tests folder will execute.
 
@@ -55,7 +51,7 @@ _Note_: some functions depend on importing files from child folders. For this re
 
 To build this dictionary, we iterate over a list of words which could be present somewhere in our wordified number in order of increasing length. For each word, we add it to the set of possible wordifications for its corresponding number. We then iterate over each element of its number to split the number into two parts. We then iterate over all possible wordifications of the left and right parts and join them with all possible wordifications for the splitting character. Since words are entered into this dictionary in increasing order of length, we are guaranteed to know the wordification for both sides of the split for all possible splits.
 
-`number_to_words` functions identically to `all_wordifications`, except that only a single wordification is returned as oppose to a list.
+`number_to_words` functions similarly to `all_wordifications`, except the dictionary is never constructed. Instead, we simply keep the longest word which fits into the phone number.
 
 # Miscellany
 
