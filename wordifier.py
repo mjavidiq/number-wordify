@@ -58,10 +58,10 @@ class wordifier:
         self.N_to_C_dict[number].add(word)
         self.N_to_C_dict[number].add(number)
 
+        # Iterate over where we split the number into two sub-numbers
+        #   that we wordify and stich together with all wordifications
+        #   of the split number
         if len(number) > 1:
-            # Iterate over where we split the number into two sub-numbers
-            #   that we wordify and stich together with all wordifications
-            #   of the split number
             for j in range(len(number)-1):
                 lower = self.wordifier(number[:j+1])
                 upper = self.wordifier(number[j+1:])

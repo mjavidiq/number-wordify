@@ -1,6 +1,9 @@
 import wordifier
 from language.language_help import fix_dashes
 
+# Given a phone number, finds all possible wordifications of it
+#   according to the specified dictionary and returns a possible
+#   wordification.
 def number_to_words(number, fname = "./language/words_alpha.txt"):
     worder = wordifier.wordifier(number, fname)
     wordified = set(worder(number.replace('-','')))

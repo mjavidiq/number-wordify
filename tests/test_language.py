@@ -1,4 +1,5 @@
 import language.language_help as lang
+
 # Test taking characters to their corresponding number
 def test_C_to_N():
     assert lang.C_to_N('C') == '2'

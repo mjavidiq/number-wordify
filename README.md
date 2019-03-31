@@ -19,6 +19,20 @@ Each primary function is located in its own file in the root folder under its re
 * `-w` or `--word` for `words_to_number` followed by the wordified phone number to convert to phone number
 * `-a` or `--all` for `all_wordifications` following by the phone number to woridfy
 
+As an example, running
+
+`python main.py -a 1-230-000-0000`
+
+from the root directory of the repository should result in
+
+`Found 4 wordifications
+1 1-AE-0-000-0000
+2 1-230-000-0000
+3 1-BE-0-000-0000
+4 1-AD-0-000-0000`
+
+up to some reordering of the wordifications.
+
 In each case the resulting phone number or wordification(s) are printed out. In the first two cases, the printed string is returned. In the latter case, all wordifications are printed and numbered.
 
 number_to_words may not return the same value for each run; this is due to the use of unordered sets for storing wordifications.
