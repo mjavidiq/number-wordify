@@ -36,20 +36,27 @@ _relevant_chars = _ordered_alphabet + _relevant_nums
 def fix_dashes(words, number):
     new_words = []
     for w in words:
+        # Get rid of double-dashes, in case we have two consecutive words
         new_w = w.replace('--','-')
+        # Word can neither start nor end with a dash
         if new_w[0] == '-':
             new_w = new_w[1::]
         if new_w[-1] == '-':
             new_w = new_w[0:-1]
 
+
         digit_count = 0
         for digit in number:
+            # If we encountered a position with a dash in the original number
             if digit == '-':
+                # Find the corresponding character in the wordified number
+                #   and add a dash following it if there isn't one already
                 curr_idx = find_nth_character(new_w, digit_count-1)
                 if new_w[curr_idx+1] == '-' or new_w[curr_idx+2] in _ordered_alphabet:
                     pass
                 else:
                     new_w = new_w[:curr_idx+1] + '-' + new_w[curr_idx+1:]
+            # Otherwise, if the character isn't a dash
             else:
                 digit_count += 1
 
