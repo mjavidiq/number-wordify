@@ -63,3 +63,12 @@ def test_product_of_wordifications():
     sub_b = len(all_wordifications(sub_number_b))   
     N = len(all_wordifications(number))
     assert sub_a*sub_b  == N
+
+# Tests that "-B-" or "-Y-" do not appear in a dash-fixed wordified
+#   string. This was a specific type of bug that was found.
+def test_no_single_chars():
+    numbers = ["1-29-1-2929"]
+    for n in numbers:
+        for w in all_wordifications(n):
+            assert not('-B-' in w)
+            assert not('-Y-' in w)

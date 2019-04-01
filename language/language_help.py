@@ -44,21 +44,36 @@ def fix_dashes(words, number):
         if new_w[-1] == '-':
             new_w = new_w[0:-1]
 
+        w_idx = 0 # Tracks the correspdonding index in the wordified version
+        in_word = False # Specifies if we're in a word currently
 
-        digit_count = 0
-        for digit in number:
-            # If we encountered a position with a dash in the original number
-            if digit == '-':
-                # Find the corresponding character in the wordified number
-                #   and add a dash following it if there isn't one already
-                curr_idx = find_nth_character(new_w, digit_count-1)
-                if new_w[curr_idx+1] == '-' or new_w[curr_idx+2] in _ordered_alphabet:
-                    pass
+        for n_idx, digit in enumerate(number):
+            if digit != '-': 
+                # Determine if we're in a word right now in new_w
+                if new_w[w_idx] in _ordered_alphabet:
+                    in_word = True
+
+                # Could be starting or leaving a word
+                elif new_w[w_idx] == '-': 
+                    w_idx += 1 # increment the index to point past the dash 
+                    if w_idx == len(new_w)-1:  # end of word
+                        _ = 1
+                    elif new_w[w_idx + 1] in _ordered_alphabet:
+                        in_word = True # Starting new word
+                    else:
+                        in_word = False # Ending a word
                 else:
-                    new_w = new_w[:curr_idx+1] + '-' + new_w[curr_idx+1:]
-            # Otherwise, if the character isn't a dash
+                    in_word = False
+            # See a dash in the original phone number
             else:
-                digit_count += 1
+                # If we're not in a word and there isn't already a dash
+                if not(in_word) and new_w[w_idx] != '-':
+                    new_w = new_w[:w_idx] + '-' + new_w[w_idx:]
+                # Don't move the word index; unneeded dash in wordification
+                else: 
+                    w_idx -= 1
+
+            w_idx += 1
 
         new_words += [str(new_w)]
 
@@ -75,4 +90,4 @@ def find_nth_character(s,n):
         if char_count == n:
             return idx
         else:
-            idx += 1
+            idx +=  1
