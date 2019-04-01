@@ -18,6 +18,7 @@ Each primary function is located in its own file in the root folder under its re
 * `-n` or `--number` for `number_to_words` following by the phone number to wordify
 * `-w` or `--word` for `words_to_number` followed by the wordified phone number to convert to phone number
 * `-a` or `--all` for `all_wordifications` following by the phone number to woridfy
+* `-d` or `--dict` to specify the path to a corpus of words other than the default dictionary
 
 As an example, running
 
